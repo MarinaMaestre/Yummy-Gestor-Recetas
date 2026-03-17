@@ -1,96 +1,136 @@
-:root {
-  --primary: #ff6b6b;
-  --secondary: #4ecdc4;
-  --dark: #2f2f2f;
-  --light: #f9f9f9;
-  --white: #ffffff;
-}
-
 .dashboard-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: var(--light);
-  min-height: 100vh;
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 40px;
+    padding: 30px;
+    background-color: #f4f7f6;
+    min-height: 100vh;
 }
 
-/* Header con Flexbox para que sea responsive */
-.main-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  padding-bottom: 30px;
-  border-bottom: 2px solid #eee;
-  margin-bottom: 30px;
+.formulario-seccion {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 20px;
+    height: fit-content;
 }
 
-.main-header h1 {
-  color: var(--primary);
-  font-size: 2.5rem;
-  margin: 0;
+.receta-form input, .receta-form textarea, .receta-form select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 12px;
+    border: 1.5px solid #eee;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    outline: none;
+    box-sizing: border-box;
 }
 
-/* Formulario Moderno */
-.form-container {
-  background: var(--white);
-  padding: 25px;
-  border-radius: 15px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-  margin-bottom: 40px;
+.receta-form input:focus {
+    border-color: #ff6b6b;
 }
 
-.add-recipe-form {
-  display: flex;
-  gap: 15px;
+/* Filas dinámicas con la X al final */
+.fila-dinamica {
+    display: grid;
+    grid-template-columns: 2fr 1fr auto;
+    gap: 8px;
+    margin-bottom: 8px;
+    align-items: center;
 }
 
-.add-recipe-form input {
-  flex: 1;
-  padding: 15px;
-  border: 2px solid #eee;
-  border-radius: 10px;
-  font-size: 1rem;
-  transition: border-color 0.3s;
+.fila-dinamica-paso {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 10px;
+    margin-bottom: 8px;
+    align-items: center;
 }
 
-.add-recipe-form input:focus {
-  outline: none;
-  border-color: var(--primary);
+.fila-dinamica input, .fila-dinamica-paso input {
+    margin-bottom: 0;
 }
 
-.btn-save {
-  background: var(--primary);
-  color: white;
-  border: none;
-  padding: 0 30px;
-  border-radius: 10px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: transform 0.2s;
-}
-
-.btn-save:hover {
-  transform: scale(1.05);
-  background: #ff5252;
-}
-
-/* Rejilla de Recetas (RESPONSIVE) */
-.recetas-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 25px;
-}
-
-/* Media Query para móviles */
-@media (max-width: 600px) {
-  .add-recipe-form {
-    flex-direction: column;
-  }
-  
-  .main-header {
-    text-align: center;
+.paso-numero {
+    background: #ff6b6b;
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
     justify-content: center;
-    gap: 15px;
-  }
+    font-size: 0.75rem;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.btn-borrar-fila {
+    background: #fff0f0;
+    color: #ff6b6b;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.btn-borrar-fila:hover {
+    background: #ff6b6b;
+    color: white;
+}
+
+.btn-add {
+    background: #f0f2f5;
+    color: #555;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.btn-guardar-receta {
+    width: 100%;
+    background: #ff6b6b;
+    color: white;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.3s;
+}
+
+.btn-guardar-receta:hover {
+    background: #ee5253;
+}
+
+.recetas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.no-recetas {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: #888;
+    padding-top: 50px;
+}
+
+@media (max-width: 1000px) {
+    .dashboard-container { grid-template-columns: 1fr; }
+    .formulario-seccion { position: relative; top: 0; }
 }

@@ -1,117 +1,103 @@
 .receta-card {
-  background: var(--white);
-  border-radius: 20px;
-  overflow: hidden;
-  position: relative;
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  border: 1px solid rgba(0,0,0,0.05);
-  display: flex;
-  flex-direction: column;
-  height: 100%; /* Para que todas las tarjetas midan lo mismo */
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.02);
 }
 
 .receta-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.08);
 }
 
-/* Acento de color en la parte superior */
 .card-accent {
-  height: 6px;
-  background: linear-gradient(90deg, var(--primary), var(--secondary));
-  width: 100%;
+    height: 5px;
+    background: #ff6b6b; /* El coral aquí arriba también */
+    width: 100%;
 }
 
 .card-body {
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
+    padding: 20px;
 }
 
 .card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
 }
 
 .card-header h3 {
-  margin: 0;
-  font-size: 1.3rem;
-  color: var(--dark);
-  text-transform: capitalize;
+    margin: 0;
+    font-size: 1.25rem;
+    color: #2d3436;
+    text-transform: capitalize;
 }
 
 .btn-borrar {
-  background: #fff0f0;
-  border: none;
-  padding: 8px;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background 0.2s;
+    background: #fff0f0;
+    border: none;
+    padding: 8px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.2s;
 }
 
 .btn-borrar:hover {
-  background: #ffe0e0;
+    background: #ff6b6b;
+    color: white;
 }
 
 .receta-info {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  margin: 15px 0;
+    display: flex;
+    gap: 15px;
+    margin: 15px 0;
+    align-items: center;
 }
 
 .badge-dificultad {
-  color: white;
-  padding: 4px 12px;
-  border-radius: 50px;
-  font-size: 0.8rem;
-  font-weight: bold;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: white;
+    background: #ff6b6b; /* Por defecto coral */
 }
 
-/* Colores dinámicos para la dificultad */
+/* Colores dinámicos */
 .badge-dificultad.fácil { background-color: #2ecc71; }
 .badge-dificultad.media { background-color: #f1c40f; }
 .badge-dificultad.difícil { background-color: #e74c3c; }
 
-.receta-tiempo {
-  font-size: 0.9rem;
-  color: #666;
-  font-weight: 500;
-}
-
 .card-footer {
-  margin-top: auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-top: 1px solid #f0f0f0;
-  padding-top: 15px;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #f9f9f9;
+    display: flex;
+    justify-content: center; /* Centramos el botón para que se vea mejor */
 }
 
-.receta-id {
-  font-size: 0.75rem;
-  color: #aaa;
-  margin: 0;
-}
-
-/* ESTILO PARA EL BOTÓN (Que ahora es un Link) */
+/* EL BOTÓN CORAL */
 .btn-detalle {
-  background: var(--secondary);
-  color: white;
-  text-decoration: none;
-  padding: 8px 16px;
-  border-radius: 10px;
-  font-weight: 600;
-  font-size: 0.9rem;
-  transition: all 0.3s ease;
+    background-color: #ff6b6b; 
+    color: white !important;
+    text-decoration: none;
+    padding: 10px 25px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.25);
+    width: 100%; /* Botón ancho para que no haya pérdida */
+    text-align: center;
 }
 
 .btn-detalle:hover {
-  background: var(--primary);
-  transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.2);
+    background-color: #ee5253; /* Un coral un poco más oscuro al pulsar */
+    box-shadow: 0 6px 18px rgba(238, 82, 83, 0.35);
+    transform: scale(1.02);
 }
