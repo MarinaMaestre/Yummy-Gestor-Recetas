@@ -1,0 +1,117 @@
+.receta-card {
+  background: var(--white);
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 1px solid rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Para que todas las tarjetas midan lo mismo */
+}
+
+.receta-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+/* Acento de color en la parte superior */
+.card-accent {
+  height: 6px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  width: 100%;
+}
+
+.card-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.card-header h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  color: var(--dark);
+  text-transform: capitalize;
+}
+
+.btn-borrar {
+  background: #fff0f0;
+  border: none;
+  padding: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s;
+}
+
+.btn-borrar:hover {
+  background: #ffe0e0;
+}
+
+.receta-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin: 15px 0;
+}
+
+.badge-dificultad {
+  color: white;
+  padding: 4px 12px;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+/* Colores dinámicos para la dificultad */
+.badge-dificultad.fácil { background-color: #2ecc71; }
+.badge-dificultad.media { background-color: #f1c40f; }
+.badge-dificultad.difícil { background-color: #e74c3c; }
+
+.receta-tiempo {
+  font-size: 0.9rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.card-footer {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #f0f0f0;
+  padding-top: 15px;
+}
+
+.receta-id {
+  font-size: 0.75rem;
+  color: #aaa;
+  margin: 0;
+}
+
+/* ESTILO PARA EL BOTÓN (Que ahora es un Link) */
+.btn-detalle {
+  background: var(--secondary);
+  color: white;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.btn-detalle:hover {
+  background: var(--primary);
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.2);
+}

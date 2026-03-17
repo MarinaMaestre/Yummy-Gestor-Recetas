@@ -5,7 +5,7 @@ const auth = require('../middleware/auth');
 
 // Todas estas rutas pasan por el "guardián" auth
 router.get('/', auth, recetaController.obtenerRecetas);
-router.get('/:id', auth, recetaController.obtenerRecetaPorId); // Ruta nueva para detalle
+router.get('/:id', auth, recetaController.obtenerRecetaPorId); 
 router.post('/', auth, recetaController.crearReceta);
 router.delete('/:id', auth, recetaController.eliminarReceta);
 
