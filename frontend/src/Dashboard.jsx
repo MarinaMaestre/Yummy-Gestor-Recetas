@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import RecetaCard from './components/RecetaCard';
 import './Dashboard.css';
@@ -16,11 +16,7 @@ const Dashboard = () => {
 
     const token = localStorage.getItem('userToken');
 
-    useEffect(() => {
-        obtenerRecetas();
-    }, []);
-
-    const obtenerRecetas = async () => {
+    const obtenerRecetas = useCallback(async () => {
         try {
             const res = await axios.get('http://localhost:5000/api/recetas', {
                 headers: { Authorization: `Bearer ${token}` }
@@ -29,9 +25,12 @@ const Dashboard = () => {
         } catch (error) {
             console.error("Error al obtener recetas", error);
         }
-    };
+    }, [token]);
 
-    // --- LÓGICA DE INGREDIENTES ---
+    useEffect(() => {
+        obtenerRecetas();
+    }, [obtenerRecetas]);
+
     const manejarCambioIngrediente = (index, e) => {
         const nuevosIngredientes = [...nuevaReceta.ingredientes];
         nuevosIngredientes[index][e.target.name] = e.target.value;
@@ -50,7 +49,6 @@ const Dashboard = () => {
         setNuevaReceta({ ...nuevaReceta, ingredientes: nuevosIngredientes });
     };
 
-    // --- LÓGICA DE PASOS ---
     const manejarCambioPaso = (index, e) => {
         const nuevosPasos = [...nuevaReceta.pasos];
         nuevosPasos[index] = e.target.value;
@@ -66,7 +64,6 @@ const Dashboard = () => {
         setNuevaReceta({ ...nuevaReceta, pasos: nuevosPasos });
     };
 
-    // --- ACCIONES DE RECETA ---
     const guardarReceta = async (e) => {
         e.preventDefault();
         try {
@@ -104,13 +101,15 @@ const Dashboard = () => {
                 <form onSubmit={guardarReceta} className="receta-form">
                     <input 
                         type="text" placeholder="¿Cómo se llama el plato?" 
-                        value={nuevaReceta.titulo} onChange={(e) => setNuevaReceta({...nuevaReceta, titulo: e.target.value})}
+                        value={nuevaReceta.titulo} 
+                        onChange={(e) => setNuevaReceta({...nuevaReceta, titulo: e.target.value})}
                         required 
                     />
                     
                     <textarea 
                         placeholder="Una breve descripción..." 
-                        value={nuevaReceta.descripcion} onChange={(e) => setNuevaReceta({...nuevaReceta, descripcion: e.target.value})}
+                        value={nuevaReceta.descripcion} 
+                        onChange={(e) => setNuevaReceta({...nuevaReceta, descripcion: e.target.value})}
                     />
 
                     <div className="form-group">
