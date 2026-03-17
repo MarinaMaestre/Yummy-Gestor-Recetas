@@ -1,0 +1,96 @@
+:root {
+  --primary: #ff6b6b;
+  --secondary: #4ecdc4;
+  --dark: #2f2f2f;
+  --light: #f9f9f9;
+  --white: #ffffff;
+}
+
+.dashboard-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: var(--light);
+  min-height: 100vh;
+}
+
+/* Header con Flexbox para que sea responsive */
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding-bottom: 30px;
+  border-bottom: 2px solid #eee;
+  margin-bottom: 30px;
+}
+
+.main-header h1 {
+  color: var(--primary);
+  font-size: 2.5rem;
+  margin: 0;
+}
+
+/* Formulario Moderno */
+.form-container {
+  background: var(--white);
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  margin-bottom: 40px;
+}
+
+.add-recipe-form {
+  display: flex;
+  gap: 15px;
+}
+
+.add-recipe-form input {
+  flex: 1;
+  padding: 15px;
+  border: 2px solid #eee;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.add-recipe-form input:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.btn-save {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 0 30px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.btn-save:hover {
+  transform: scale(1.05);
+  background: #ff5252;
+}
+
+/* Rejilla de Recetas (RESPONSIVE) */
+.recetas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
+}
+
+/* Media Query para móviles */
+@media (max-width: 600px) {
+  .add-recipe-form {
+    flex-direction: column;
+  }
+  
+  .main-header {
+    text-align: center;
+    justify-content: center;
+    gap: 15px;
+  }
+}
