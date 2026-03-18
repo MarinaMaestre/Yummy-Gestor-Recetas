@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import confetti from 'canvas-confetti'; // No olvides instalarlo: npm install canvas-confetti
+import confetti from 'canvas-confetti'; 
 import './RecetaDetalle.css';
 
 const RecetaDetalle = () => {
@@ -9,18 +9,21 @@ const RecetaDetalle = () => {
     const navigate = useNavigate();
     const [receta, setReceta] = useState(null);
     
+    // Estados para el progreso
     const [ingredientesListos, setIngredientesListos] = useState([]);
     const [pasosListos, setPasosListos] = useState([]);
     const [modoLectura, setModoLectura] = useState(false);
+    
+    // Referencia para bajar la pantalla automáticamente al final
+    const mensajeFinalRef = useRef(null);
     
     const token = localStorage.getItem('userToken');
 
     useEffect(() => {
         const obtenerDetalle = async () => {
             try {
-                const res = await axios.get(`http://localhost:5000/api/recetas/${id}`, {
-                    headers: { Authorization: `Bearer ${token}` }
-                });
+                const config = token ? { headers: { Authorization: `Bearer ${token}` } } : {};
+                const res = await axios.get(`http://localhost:5000/api/recetas/${id}`, config);
                 setReceta(res.data);
             } catch (error) {
                 console.error("Error al obtener la receta", error);
@@ -28,6 +31,15 @@ const RecetaDetalle = () => {
         };
         obtenerDetalle();
     }, [id, token]);
+
+    // Efecto para hacer scroll suave cuando se termina la receta
+    useEffect(() => {
+        if (receta && pasosListos.length === receta.pasos.length && pasosListos.length > 0) {
+            setTimeout(() => {
+                mensajeFinalRef.current?.scrollIntoView({ behavior: 'smooth' });
+            }, 500);
+        }
+    }, [pasosListos, receta]);
 
     const toggleIngrediente = (index) => {
         if (ingredientesListos.includes(index)) {
@@ -66,22 +78,24 @@ const RecetaDetalle = () => {
         }, 250);
     };
 
-    if (!receta) return <div className="cargando">Cargando tu receta... 👩‍🍳</div>;
+    if (!receta) return <div className="cargando-screen">Preparando los fogones... 👩‍🍳</div>;
 
     return (
-        <div className="detalle-container">
-            <button className="btn-volver" onClick={() => navigate(-1)}>← Volver al Dashboard</button>
+        <div className={`detalle-container ${modoLectura ? 'modo-lectura-activo' : ''}`}>
+            
+            <button className="btn-volver" onClick={() => navigate(-1)}>← Volver</button>
             
             <header className="detalle-header">
+                {receta.categoria && <div className="categoria-tag">{receta.categoria}</div>}
                 <h1>{receta.titulo}</h1>
                 <div className="detalle-meta">
                     <span className={`badge-dificultad ${receta.dificultad.toLowerCase()}`}>{receta.dificultad}</span>
-                    <span className="tiempo-detalle">⏱️ {receta.tiempo} min</span>
+                    <span className="tiempo-detalle">⏱️ {receta.tiempo || '--'} min</span>
                     <button 
                         className={`btn-lectura ${modoLectura ? 'activo' : ''}`} 
                         onClick={() => setModoLectura(!modoLectura)}
                     >
-                        {modoLectura ? "👓 Modo Normal" : "🔍 Modo Lectura"}
+                        {modoLectura ? "👓 Ver Normal" : "🔍 Modo Lectura"}
                     </button>
                 </div>
             </header>
@@ -89,7 +103,7 @@ const RecetaDetalle = () => {
             <div className="detalle-grid">
                 <aside className="detalle-ingredientes">
                     <h3>Ingredientes</h3>
-                    <p className="instruccion-tap">TOCA PARA MARCAR LO QUE YA TIENES</p>
+                    <p className="instruccion-tap">MARCA LOS QUE TENGAS LISTOS</p>
                     <ul>
                         {receta.ingredientes.map((ing, index) => (
                             <li 
@@ -106,11 +120,11 @@ const RecetaDetalle = () => {
                 </aside>
 
                 <main className="detalle-pasos">
-                    <h3>Preparación</h3>
-                    <p className="instruccion-tap">TOCA EL NÚMERO AL COMPLETAR EL PASO</p>
-                    <ol className={modoLectura ? 'pasos-grandes' : ''}>
+                    <h3>Pasos a seguir</h3>
+                    <p className="instruccion-tap">TOCA EL PASO AL TERMINARLO</p>
+                    <div className={modoLectura ? 'pasos-en-foco' : 'pasos-lista'}>
                         {receta.pasos.map((paso, index) => (
-                            <li 
+                            <div 
                                 key={index} 
                                 className={`paso-item ${pasosListos.includes(index) ? 'paso-completado' : ''}`}
                                 onClick={() => togglePaso(index)}
@@ -119,13 +133,14 @@ const RecetaDetalle = () => {
                                     {pasosListos.includes(index) ? '✓' : index + 1}
                                 </span>
                                 <p>{paso}</p>
-                            </li>
+                            </div>
                         ))}
-                    </ol>
+                    </div>
+                    
                     {pasosListos.length === receta.pasos.length && (
-                        <div className="mensaje-exito">
-                            <p>✨ ¡Receta completada con éxito! ✨</p>
-                            <h2>¡Buen provecho, Marina! 🥘🍴</h2>
+                        <div className="mensaje-exito" ref={mensajeFinalRef}>
+                            <p>✨ ¡Receta completada! ✨</p>
+                            <h2>¡Buen provecho, {receta.usuario?.nombre || 'Chef'}! 🥘🍴</h2>
                         </div>
                     )}
                 </main>

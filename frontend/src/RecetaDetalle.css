@@ -1,219 +1,74 @@
+/* --- LAYOUT BASE --- */
 .detalle-container {
     max-width: 1000px;
     margin: 40px auto;
-    padding: 30px; /* Un poco más de aire */
+    padding: 30px;
     background: white;
     border-radius: 30px;
     box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+    transition: all 0.4s ease-in-out;
 }
+
+.cargando-screen { text-align: center; padding: 100px; font-size: 1.2rem; color: #636e72; }
 
 .btn-volver {
-    background: none;
-    border: none;
-    color: #ff6b6b;
-    font-weight: bold;
-    cursor: pointer;
-    margin-bottom: 20px;
-    font-size: 1rem;
-    transition: transform 0.2s ease;
+    background: none; border: none; color: #ff6b6b; font-weight: bold;
+    cursor: pointer; margin-bottom: 20px; font-size: 1rem;
 }
 
-.btn-volver:hover {
-    transform: translateX(-5px); /* Efecto sutil al señalar hacia atrás */
-}
+/* --- HEADER --- */
+.detalle-header { text-align: center; margin-bottom: 40px; border-bottom: 2px solid #f9f9f9; padding-bottom: 30px; }
+.categoria-tag { color: #ff6b6b; font-weight: 800; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; }
+.detalle-header h1 { font-size: 2.5rem; color: #2d3436; margin: 10px 0; }
+.detalle-meta { display: flex; justify-content: center; align-items: center; gap: 20px; margin-top: 15px; }
 
-.detalle-header {
-    text-align: center;
-    margin-bottom: 40px;
-    border-bottom: 2px solid #f9f9f9;
-    padding-bottom: 30px;
-}
+.badge-dificultad { padding: 5px 15px; border-radius: 20px; color: white; font-weight: bold; font-size: 0.8rem; text-transform: capitalize; }
+.badge-dificultad.fácil { background: #2ecc71; }
+.badge-dificultad.media { background: #f1c40f; }
+.badge-dificultad.difícil { background: #e74c3c; }
 
-.detalle-meta {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    margin-top: 15px;
-}
+/* --- GRID --- */
+.detalle-grid { display: grid; grid-template-columns: 320px 1fr; gap: 40px; }
 
-.detalle-grid {
-    display: grid;
-    grid-template-columns: 320px 1fr;
-    gap: 50px;
-}
+/* --- INGREDIENTES --- */
+.detalle-ingredientes { background: #fdfdfd; padding: 25px; border-radius: 20px; border: 1px solid #f0f0f0; height: fit-content; position: sticky; top: 20px; }
+.instruccion-tap { font-size: 0.7rem; color: #ff6b6b; margin-bottom: 12px; font-weight: 800; }
+.detalle-ingredientes ul { list-style: none; padding: 0; }
+.detalle-ingredientes li { padding: 12px 0; border-bottom: 1px dashed #eee; display: flex; align-items: center; cursor: pointer; }
+.ing-cantidad { background: #fff0f0; color: #ff6b6b; font-weight: 800; padding: 2px 8px; border-radius: 6px; margin-right: 12px; min-width: 35px; text-align: center; }
+.ingrediente-tachado { color: #b2bec3; text-decoration: line-through; opacity: 0.5; }
 
-/* --- SECCIÓN INGREDIENTES --- */
-.detalle-ingredientes {
-    background: #fdfdfd;
-    padding: 25px;
-    border-radius: 20px;
-    border: 1px solid #f0f0f0;
-    height: fit-content;
-    position: sticky; /* Se queda a la vista mientras haces scroll en los pasos */
-    top: 20px;
-}
+/* --- PASOS --- */
+.pasos-lista { display: flex; flex-direction: column; gap: 10px; }
+.paso-item { display: flex; gap: 20px; padding: 15px; border-radius: 15px; cursor: pointer; transition: background 0.2s; }
+.paso-item:hover { background: #fffafa; }
+.paso-num { background: #ff6b6b; color: white; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-weight: bold; }
+.paso-completado p { color: #b2bec3; text-decoration: line-through; }
+.paso-completado .paso-num { background: #2ecc71; }
 
-.instruccion-tap {
-    font-size: 0.75rem;
-    color: #ff6b6b;
-    margin-bottom: 15px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
+/* --- BOTÓN MODO LECTURA --- */
+.btn-lectura { background: #f1f2f5; border: none; padding: 10px 20px; border-radius: 20px; font-weight: bold; cursor: pointer; color: #555; }
+.btn-lectura.activo { background: #ff6b6b; color: white; }
 
-.detalle-ingredientes ul {
-    list-style: none;
-    padding: 0;
-}
+/* --- MODO LECTURA ACTIVO --- */
+.modo-lectura-activo .detalle-grid { grid-template-columns: 1fr; max-width: 850px; margin: 0 auto; }
 
-.detalle-ingredientes li {
-    padding: 12px 0;
-    border-bottom: 1px dashed #eee;
-    color: #2d3436;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
+/* Los ingredientes se quedan pero compactos arriba */
+.modo-lectura-activo .detalle-ingredientes { position: relative; top: 0; margin-bottom: 30px; background: #fffafa; border: 2px dashed #ff6b6b; }
+.modo-lectura-activo .detalle-ingredientes ul { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
 
-.ingrediente-tachado {
-    color: #b2bec3 !important;
-    text-decoration: line-through;
-    opacity: 0.6;
-}
+/* Pasos gigantes */
+.pasos-en-foco .paso-item { background: white; border: 2px solid #f0f0f0; padding: 30px; border-radius: 25px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
+.pasos-en-foco .paso-item p { font-size: 1.8rem; font-weight: 600; line-height: 1.4; color: #2d3436; }
+.pasos-en-foco .paso-num { width: 55px; height: 55px; font-size: 1.4rem; }
 
-/* --- SECCIÓN PASOS --- */
-.paso-item {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 25px;
-    align-items: flex-start;
-    padding: 15px;
-    border-radius: 15px;
-    transition: background 0.2s ease;
-    cursor: pointer;
-}
+/* ÉXITO */
+.mensaje-exito { margin-top: 40px; padding: 40px; background: #e3f9e5; border-radius: 25px; text-align: center; border: 3px dashed #2ecc71; }
+.mensaje-exito h2 { color: #27ae60; font-size: 2rem; }
 
-.paso-item:hover {
-    background: #fffafa; /* Resalta el paso que estás leyendo */
-}
-
-.paso-num {
-    background: #ff6b6b;
-    color: white;
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    font-weight: bold;
-    transition: all 0.3s ease;
-}
-
-/* Efecto cuando el paso está completado */
-.paso-completado p {
-    color: #b2bec3 !important;
-    text-decoration: line-through;
-    opacity: 0.6;
-}
-
-.paso-completado .paso-num {
-    background: #2ecc71 !important; /* El verde de éxito */
-    transform: scale(0.9);
-}
-
-/* --- MODO LECTURA --- */
-.btn-lectura {
-    background: #f1f2f5;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 12px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    color: #555;
-}
-
-.btn-lectura.activo {
-    background: #ff6b6b;
-    color: white;
-    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.2);
-}
-
-.pasos-grandes .paso-item p {
-    font-size: 1.5rem;
-    line-height: 1.6;
-    color: #1e272e;
-}
-
-.pasos-grandes .paso-num {
-    width: 45px;
-    height: 45px;
-    font-size: 1.2rem;
-}
-
-/* --- RESPONSIVE --- */
+/* RESPONSIVE */
 @media (max-width: 850px) {
     .detalle-grid { grid-template-columns: 1fr; }
     .detalle-ingredientes { position: relative; top: 0; }
-    .detalle-container { margin: 10px; padding: 20px; }
-}
-
-/* Arreglo de los ingredientes */
-.detalle-ingredientes li {
-    display: flex;
-    align-items: center;
-    padding: 12px 0;
-    border-bottom: 1px dashed #eee;
-    cursor: pointer;
-    font-size: 1rem;
-}
-
-.ing-cantidad {
-    background: #fff0f0; /* Un fondo coral muy suave */
-    color: #ff6b6b;
-    font-weight: 800;
-    padding: 2px 8px;
-    border-radius: 6px;
-    margin-right: 12px; /* ESTO separa el número del nombre */
-    min-width: 35px;
-    text-align: center;
-}
-
-.ing-nombre {
-    color: #2d3436;
-    font-weight: 500;
-}
-
-/* El resto del estilo se mantiene pero mejorado */
-.ingrediente-tachado {
-    opacity: 0.5;
-}
-
-.ingrediente-tachado .ing-nombre {
-    text-decoration: line-through;
-}
-
-.ingrediente-tachado .ing-cantidad {
-    background: #f1f2f6;
-    color: #b2bec3;
-}
-
-.mensaje-exito {
-    margin-top: 40px;
-    padding: 30px;
-    background: #e3f9e5;
-    border-radius: 20px;
-    text-align: center;
-    border: 2px dashed #2ecc71;
-    animation: aparecer 0.5s ease-out;
-}
-
-@keyframes aparecer {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    .pasos-en-foco .paso-item p { font-size: 1.4rem; }
 }
