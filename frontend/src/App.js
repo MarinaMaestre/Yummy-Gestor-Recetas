@@ -4,8 +4,9 @@ import Navbar from './components/Navbar';
 import Login from './Login';
 import Register from './Register';
 import Dashboard from './Dashboard';
-import RecetaDetalle from './RecetaDetalle'; // <--- ¡ESTA LÍNEA ES LA QUE FALTA!
+import RecetaDetalle from './RecetaDetalle'; 
 import './App.css';
+<Route path="/receta/:id" element={<RecetaDetalle />} />
 
 function App() {
     const token = localStorage.getItem('userToken');

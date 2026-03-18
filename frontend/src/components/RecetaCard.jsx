@@ -1,48 +1,45 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // <--- Importante para navegar
+import { Link } from 'react-router-dom'; // Importante para la navegación
 import './RecetaCard.css';
 
-const RecetaCard = ({ receta, onEliminar }) => {
-    // Extraemos los datos de la receta con valores por defecto por si falta algo
-    const { 
-        titulo = "Sin título", 
-        dificultad = "Media", 
-        tiempo = "--", 
-        _id 
-    } = receta;
+const RecetaCard = ({ receta, onEliminar, onEditar }) => {
+    // Función para elegir un icono según la dificultad
+    const obtenerIcono = (dificultad) => {
+        switch (dificultad?.toLowerCase()) {
+            case 'fácil': return '🍳';
+            case 'difícil': return '🧑‍🍳';
+            default: return '🥘'; // Media
+        }
+    };
 
     return (
         <div className="receta-card">
-            {/* Decoración visual superior */}
-            <div className="card-accent"></div>
+            {/* Cabecera minimalista con el color de dificultad */}
+            <div className={`card-accent ${receta.dificultad?.toLowerCase()}`}>
+                <span className="icono-dificultad">{obtenerIcono(receta.dificultad)}</span>
+            </div>
             
             <div className="card-body">
                 <div className="card-header">
-                    <h3>{titulo}</h3>
-                    <button 
-                        className="btn-borrar" 
-                        onClick={() => onEliminar(_id)}
-                        title="Eliminar receta"
-                    >
-                        🗑️
-                    </button>
+                    <h3>{receta.titulo}</h3>
+                    <div className="card-actions">
+                        <button className="btn-icon edit" onClick={() => onEditar(receta)} title="Editar">✏️</button>
+                        <button className="btn-icon delete" onClick={() => onEliminar(receta._id)} title="Eliminar">🗑️</button>
+                    </div>
                 </div>
 
+                <p className="descripcion-corta">{receta.descripcion}</p>
+
                 <div className="receta-info">
-                    {/* Convertimos a minúsculas para que el CSS de colores funcione */}
-                    <span className={`badge-dificultad ${dificultad.toLowerCase()}`}>
-                        {dificultad}
+                    <span className={`badge-dificultad ${receta.dificultad?.toLowerCase()}`}>
+                        {receta.dificultad}
                     </span>
-                    <span className="receta-tiempo">
-                        🕒 {tiempo} min
-                    </span>
+                    <span className="tiempo-tag">⏱️ {receta.tiempo || '--'} min</span>
                 </div>
 
                 <div className="card-footer">
-                    <p className="receta-id">ID: {_id ? _id.substring(0, 8) : '...'}...</p>
-                    
-                    {/* CAMBIO CLAVE: El botón ahora es un Link que apunta a la ruta de detalle */}
-                    <Link to={`/receta/${_id}`} className="btn-detalle">
+                    {/* Convertimos el botón en un Link que apunta al ID de la receta */}
+                    <Link to={`/receta/${receta._id}`} className="btn-detalle">
                         Ver preparación
                     </Link>
                 </div>

@@ -12,7 +12,7 @@ const Login = () => {
         setError(null);
         try {
             await login(email, password);
-            // Si todo va bien, redirigimos o refrescamos
+            // Si todo va bien, redirigimos
             window.location.href = '/'; 
         } catch (err) {
             setError('Email o contraseña incorrectos. Inténtalo de nuevo.');
@@ -21,31 +21,46 @@ const Login = () => {
 
     return (
         <div className="login-container">
-            <h2>Bienvenida a Yummy</h2>
-            <p>Introduce tus datos para gestionar tus recetas</p>
-            
-            <form className="login-form" onSubmit={handleSubmit}>
-                <input 
-                    type="email" 
-                    placeholder="Tu correo electrónico" 
-                    value={email} 
-                    onChange={(e) => setEmail(e.target.value)} 
-                    required
-                />
-                <input 
-                    type="password" 
-                    placeholder="Tu contraseña" 
-                    value={password} 
-                    onChange={(e) => setPassword(e.target.value)} 
-                    required
-                />
+            <div className="login-card">
+                <div className="login-header">
+                    <h1>¡Bienvenida a Yummy! 🥘</h1>
+                    <p>Introduce tus datos para gestionar tus recetas</p>
+                </div>
                 
-                {error && <p style={{ color: 'red', fontSize: '0.9rem' }}>{error}</p>}
-                
-                <button type="submit" className="btn-login">
-                    Entrar en mi cocina
-                </button>
-            </form>
+                <form className="login-form" onSubmit={handleSubmit}>
+                    <div className="input-group">
+                        <label className="mini-label">Correo Electrónico</label>
+                        <input 
+                            type="email" 
+                            placeholder="tu@email.com" 
+                            value={email} 
+                            onChange={(e) => setEmail(e.target.value)} 
+                            required
+                        />
+                    </div>
+
+                    <div className="input-group">
+                        <label className="mini-label">Contraseña</label>
+                        <input 
+                            type="password" 
+                            placeholder="••••••••" 
+                            value={password} 
+                            onChange={(e) => setPassword(e.target.value)} 
+                            required
+                        />
+                    </div>
+                    
+                    {error && <p className="error-message">{error}</p>}
+                    
+                    <button type="submit" className="btn-login">
+                        Entrar en mi cocina
+                    </button>
+                </form>
+
+                <div className="login-footer">
+                    <p>¿Eres nueva? <a href="/register">Crea una cuenta aquí</a></p>
+                </div>
+            </div>
         </div>
     );
 };

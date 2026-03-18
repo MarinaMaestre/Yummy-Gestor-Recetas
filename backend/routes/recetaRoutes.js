@@ -8,5 +8,6 @@ router.get('/', auth, recetaController.obtenerRecetas);
 router.get('/:id', auth, recetaController.obtenerRecetaPorId); 
 router.post('/', auth, recetaController.crearReceta);
 router.delete('/:id', auth, recetaController.eliminarReceta);
+router.put('/:id', auth, recetaController.actualizarReceta);
 
 module.exports = router;

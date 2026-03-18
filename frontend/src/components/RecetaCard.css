@@ -1,11 +1,12 @@
 .receta-card {
     background: white;
-    border-radius: 20px;
+    border-radius: 24px; /* Un poco más curvo para que sea más amable */
     overflow: hidden;
     transition: all 0.3s ease;
     border: 1px solid rgba(0,0,0,0.05);
     display: flex;
     flex-direction: column;
+    height: 100%; 
     box-shadow: 0 4px 15px rgba(0,0,0,0.02);
 }
 
@@ -14,90 +15,112 @@
     box-shadow: 0 12px 25px rgba(0,0,0,0.08);
 }
 
+/* Franja superior más alta para alojar el icono */
 .card-accent {
-    height: 5px;
-    background: #ff6b6b; /* El coral aquí arriba también */
+    height: 60px; 
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    background: #f1f2f6; /* Color gris suave por defecto */
+    transition: background 0.3s ease;
 }
+
+/* Colores de fondo pasteles según dificultad */
+.card-accent.fácil { background-color: #e3f9e5; }
+.card-accent.media { background-color: #fff4e5; }
+.card-accent.difícil { background-color: #fee2e2; }
 
 .card-body {
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; 
 }
 
 .card-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
+    align-items: flex-start;
+    margin-bottom: 8px;
+    min-height: 50px; 
 }
 
 .card-header h3 {
     margin: 0;
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     color: #2d3436;
-    text-transform: capitalize;
+    font-weight: 700;
+    line-height: 1.3;
 }
 
-.btn-borrar {
-    background: #fff0f0;
-    border: none;
-    padding: 8px;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.btn-borrar:hover {
-    background: #ff6b6b;
-    color: white;
+/* Descripción con estilo limpio */
+.descripcion-corta {
+    font-size: 0.9rem;
+    color: #636e72;
+    margin-bottom: 15px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-height: 1.5;
 }
 
 .receta-info {
     display: flex;
-    gap: 15px;
-    margin: 15px 0;
+    gap: 12px;
+    margin-bottom: 15px;
     align-items: center;
+}
+
+/* Estilo para el tiempo tipo 'píldora' */
+.tiempo-tag {
+    font-size: 0.8rem;
+    background: #f1f2f6;
+    padding: 4px 10px;
+    border-radius: 8px;
+    color: #2d3436;
+    font-weight: 600;
 }
 
 .badge-dificultad {
     padding: 4px 12px;
     border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: bold;
+    font-size: 0.75rem;
+    font-weight: 800;
     color: white;
-    background: #ff6b6b; /* Por defecto coral */
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-/* Colores dinámicos */
 .badge-dificultad.fácil { background-color: #2ecc71; }
 .badge-dificultad.media { background-color: #f1c40f; }
 .badge-dificultad.difícil { background-color: #e74c3c; }
 
 .card-footer {
-    margin-top: 15px;
+    margin-top: auto; 
     padding-top: 15px;
     border-top: 1px solid #f9f9f9;
-    display: flex;
-    justify-content: center; /* Centramos el botón para que se vea mejor */
 }
 
-/* EL BOTÓN CORAL */
 .btn-detalle {
+    display: block;
     background-color: #ff6b6b; 
     color: white !important;
     text-decoration: none;
-    padding: 10px 25px;
-    border-radius: 12px;
+    padding: 12px;
+    border-radius: 14px; /* Botones más redondeados */
     font-weight: bold;
     font-size: 0.9rem;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.25);
-    width: 100%; /* Botón ancho para que no haya pérdida */
+    width: 100%; 
     text-align: center;
+    border: none;
+    cursor: pointer;
 }
 
 .btn-detalle:hover {
-    background-color: #ee5253; /* Un coral un poco más oscuro al pulsar */
-    box-shadow: 0 6px 18px rgba(238, 82, 83, 0.35);
-    transform: scale(1.02);
+    background-color: #ee5253;
+    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
 }
