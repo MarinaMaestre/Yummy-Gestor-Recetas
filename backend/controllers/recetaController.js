@@ -9,6 +9,7 @@ exports.obtenerRecetas = async (req, res) => {
         const recetas = await Receta.find({ usuario: usuarioId }).sort({ createdAt: -1 });
         res.json(recetas);
     } catch (error) {
+        console.error(error);
         res.status(500).send('Error al obtener recetas');
     }
 };
@@ -26,6 +27,7 @@ exports.obtenerRecetaPorId = async (req, res) => {
 
         res.json(receta);
     } catch (error) {
+        console.error(error);
         res.status(500).send('Error al buscar la receta');
     }
 };
@@ -33,7 +35,18 @@ exports.obtenerRecetaPorId = async (req, res) => {
 // 3. CREAR RECETA
 exports.crearReceta = async (req, res) => {
     try {
-        const { titulo, descripcion, ingredientes, pasos, dificultad, tiempo } = req.body;
+        // Extraemos TODOS los campos del body, incluyendo los nuevos
+        const { 
+            titulo, 
+            descripcion, 
+            ingredientes, 
+            pasos, 
+            dificultad, 
+            tiempo, 
+            categoria, 
+            esPublica 
+        } = req.body;
+
         const usuarioId = req.user ? (req.user.usuario ? req.user.usuario.id : req.user.id) : null;
 
         const nuevaReceta = new Receta({
@@ -43,12 +56,15 @@ exports.crearReceta = async (req, res) => {
             pasos,
             dificultad,
             tiempo,
+            categoria, 
+            esPublica, 
             usuario: usuarioId
         });
 
         await nuevaReceta.save();
         res.status(201).json(nuevaReceta);
     } catch (error) {
+        console.error(error);
         res.status(500).send('Error al guardar la receta');
     }
 };
@@ -65,6 +81,7 @@ exports.eliminarReceta = async (req, res) => {
         await Receta.findByIdAndDelete(req.params.id);
         res.json({ msg: 'Receta eliminada' });
     } catch (error) {
+        console.error(error);
         res.status(500).send('Error al eliminar');
     }
 };
@@ -72,14 +89,24 @@ exports.eliminarReceta = async (req, res) => {
 // 5. EDITAR RECETA (ACTUALIZAR)
 exports.actualizarReceta = async (req, res) => {
     try {
-        const { titulo, descripcion, ingredientes, pasos, dificultad, tiempo } = req.body;
+        // Extraemos todos los campos para que la edición sea completa
+        const { 
+            titulo, 
+            descripcion, 
+            ingredientes, 
+            pasos, 
+            dificultad, 
+            tiempo, 
+            categoria, 
+            esPublica 
+        } = req.body;
+
         let receta = await Receta.findById(req.params.id);
 
         if (!receta) {
             return res.status(404).json({ msg: "Receta no encontrada" });
         }
 
-        // Usamos la misma lógica de usuarioId que en las otras funciones
         const usuarioId = req.user ? (req.user.usuario ? req.user.usuario.id : req.user.id) : null;
         
         if (receta.usuario.toString() !== usuarioId) {
@@ -92,7 +119,9 @@ exports.actualizarReceta = async (req, res) => {
             ingredientes,
             pasos,
             dificultad,
-            tiempo
+            tiempo,
+            categoria, 
+            esPublica   
         };
 
         receta = await Receta.findByIdAndUpdate(
@@ -105,5 +134,17 @@ exports.actualizarReceta = async (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(500).send("Hubo un error al actualizar la receta");
+    }
+};
+
+// 6. OBTENER RECETAS PÚBLICAS
+exports.obtenerRecetasPublicas = async (req, res) => {
+    try {
+        // Buscamos todas las que tengan esPublica en true
+        // .populate('usuario', 'nombre') sirve para saber quién la escribió
+        const recetas = await Receta.find({ esPublica: true }).sort({ createdAt: -1 });
+        res.json(recetas);
+    } catch (error) {
+        res.status(500).send('Error al obtener recetas públicas');
     }
 };

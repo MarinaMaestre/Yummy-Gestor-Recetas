@@ -9,9 +9,17 @@ const recetaSchema = mongoose.Schema({
     }],
     pasos: [{ type: String, required: true }],
     dificultad: { type: String, enum: ['Fácil', 'Media', 'Difícil'], default: 'Media' },
-    tiempo: { type: Number }, // En minutos
+    tiempo: { type: Number },
+   
+    categoria: { 
+        type: String, 
+        enum: ['Entrante', 'Plato Principal', 'Postre', 'Desayuno/Merienda'], 
+        default: 'Entrante' 
+    },
+    esPublica: { type: Boolean, default: false },
+    
     usuario: { type: mongoose.Schema.Types.ObjectId, ref: 'Usuario', required: false },
-    foto: { type: String } // URL de la imagen
+    foto: { type: String }
 }, { timestamps: true });
 
 module.exports = mongoose.model('Receta', recetaSchema);

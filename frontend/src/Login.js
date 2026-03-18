@@ -23,7 +23,7 @@ const Login = () => {
         <div className="login-container">
             <div className="login-card">
                 <div className="login-header">
-                    <h1>¡Bienvenida a Yummy! 🥘</h1>
+                    <h1>¡Bienvenid@ a Yummy! 🥘</h1>
                     <p>Introduce tus datos para gestionar tus recetas</p>
                 </div>
                 
@@ -58,7 +58,7 @@ const Login = () => {
                 </form>
 
                 <div className="login-footer">
-                    <p>¿Eres nueva? <a href="/register">Crea una cuenta aquí</a></p>
+                    <p>¿Eres nuev@? <a href="/register">Crea una cuenta aquí</a></p>
                 </div>
             </div>
         </div>

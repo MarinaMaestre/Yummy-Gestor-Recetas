@@ -5,8 +5,9 @@ import Login from './Login';
 import Register from './Register';
 import Dashboard from './Dashboard';
 import RecetaDetalle from './RecetaDetalle'; 
+// IMPORTAMOS EL EXPLORADOR
+import Explorer from './Explorer'; 
 import './App.css';
-<Route path="/receta/:id" element={<RecetaDetalle />} />
 
 function App() {
     const token = localStorage.getItem('userToken');
@@ -19,7 +20,10 @@ function App() {
                     <Route path="/" element={!token ? <Login /> : <Navigate to="/dashboard" />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/dashboard" element={token ? <Dashboard /> : <Navigate to="/" />} />
-                    <Route path="/explorar" element={<div style={{padding: '50px'}}><h2>Próximamente: Recetas de la comunidad</h2></div>} />
+                    
+                    {/* CAMBIAMOS ESTA LÍNEA PARA QUE USE EL COMPONENTE */}
+                    <Route path="/explorar" element={<Explorer />} />
+                    
                     <Route path="/receta/:id" element={token ? <RecetaDetalle /> : <Navigate to="/" />} />
                 </Routes>
             </div>
