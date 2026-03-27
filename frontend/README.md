@@ -1,70 +1,70 @@
-# Getting Started with Create React App
+Yummy! 🥘 ✨
+Yummy! es una aplicación web Full-Stack diseñada para gestionar recetas de cocina de forma personal, sencilla y, sobre todo, accesible. Este proyecto nace de la necesidad de tener un espacio digital propio donde guardar nuestras recetas, pero con un enfoque real en la usabilidad mientras cocinamos.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+🚀 Características principales
+Gestión Completa de Recetas (CRUD): Registro, consulta, edición y eliminación de platos de forma privada y segura.
 
-## Available Scripts
+Modo Lectura Inmersivo: Una interfaz diseñada para evitar distracciones, con textos grandes y claros, ideal para seguir los pasos con el móvil en la cocina.
 
-In the project directory, you can run:
+Seguridad con JWT: Implementación de autenticación mediante JSON Web Tokens para proteger la privacidad de cada usuario.
 
-### `npm start`
+Buscador y Filtros Dinámicos: Localización inmediata de recetas por título, ingredientes o categorías (Postres, Entrantes, etc.).
 
-Runs the app in the development mode.\
-Open [http://localhost:5000](http://localhost:5000) to view it in your browser.
+Experiencia de Usuario (UX): Feedback visual constante, estados de carga y una celebración con confeti al completar con éxito una receta.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+🛠️ Stack Tecnológico
+Backend:
 
-### `npm test`
+Node.js & Express.js: Motor del servidor y gestión de rutas API.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+MongoDB & Mongoose: Base de datos NoSQL para un almacenamiento flexible de los platos.
 
-### `npm run build`
+Bcryptjs & JWT: Seguridad en el cifrado de contraseñas y gestión de sesiones.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Frontend:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+React.js: Biblioteca principal para una interfaz rápida y reactiva.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Axios: Gestión de todas las peticiones asíncronas hacia el servidor.
 
-### `npm run eject`
+CSS3 Personalizado: Diseño Responsive total, adaptado a móviles, tablets y escritorio.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+📦 Instalación y Configuración Local
+Para poner en marcha el proyecto en tu máquina, sigue estos pasos:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Clonar el repositorio
+Bash
+git clone https://github.com/tu-usuario/yummy-proyecto.git
+cd yummy-proyecto
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+2. Configurar el Backend
+Bash
+cd backend
+npm install
+Importante: Crea un archivo .env en la carpeta backend con las variables PORT, MONGODB_URI y JWT_SECRET.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Bash
+npm run dev
 
-## Learn More
+3. Configurar el Frontend
+Bash
+cd ../frontend
+npm install
+npm start
+La aplicación se abrirá en http://localhost:3000.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+👓 Compromiso con la Accesibilidad
+Uno de los pilares de Yummy! es no dejar a nadie fuera. El proyecto ha sido auditado con Lighthouse, obteniendo una puntuación de 92/100 en Accesibilidad.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Se han cuidado aspectos como:
 
-### Code Splitting
+Jerarquía semántica de etiquetas (H1, H2, labels).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Contrastes de color para facilitar la lectura.
 
-### Analyzing the Bundle Size
+Navegabilidad mediante teclado y compatibilidad con lectores de pantalla.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+👩‍💻 Autora
+Marina Maestre Sánchez Proyecto de Fin de Grado - 2º DAM (Desarrollo de Aplicaciones Multiplataforma)
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Construido con dedicación para hacer la cocina un poco más fácil para todos.
