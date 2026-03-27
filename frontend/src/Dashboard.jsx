@@ -48,8 +48,6 @@ const Dashboard = () => {
         obtenerRecetas();
     }, [obtenerRecetas]);
 
-    // FIX: comparación sin toLowerCase para evitar bugs con acentos y espacios,
-    // usando trim() en ambos lados y comparando los valores exactos del array CATEGORIAS.
     const recetasFiltradas = recetas.filter(receta => {
         const busquedaLower = busqueda.toLowerCase();
         const coincideBusqueda =
@@ -76,8 +74,6 @@ const Dashboard = () => {
             pasos: receta.pasos?.length ? receta.pasos : [''],
             dificultad: receta.dificultad || 'Media',
             tiempo: receta.tiempo || '',
-            // FIX: garantizamos que la categoría guardada coincide exactamente
-            // con uno de los valores del array CATEGORIAS
             categoria: CATEGORIAS.includes(receta.categoria?.trim())
                 ? receta.categoria.trim()
                 : 'Entrante',
@@ -114,7 +110,6 @@ const Dashboard = () => {
     const guardarReceta = async (e) => {
         e.preventDefault();
         setError('');
-        // FIX: enviamos la categoría con trim() para evitar espacios accidentales
         const recetaAGuardar = {
             ...nuevaReceta,
             categoria: nuevaReceta.categoria.trim()
@@ -159,7 +154,6 @@ const Dashboard = () => {
         setMostrarFormulario(true);
     };
 
-    // Cerrar modal con Escape
     useEffect(() => {
         const manejarEscape = (e) => {
             if (e.key === 'Escape' && mostrarFormulario) limpiarFormulario();
@@ -174,7 +168,7 @@ const Dashboard = () => {
                 <div className="header-info">
                     <h1>Mis Recetas 🥘</h1>
                     <p>
-                        Hola Marina, tienes{' '}
+                        Hola, tienes{' '}
                         <strong>{recetas.length}</strong>{' '}
                         {recetas.length === 1 ? 'receta guardada' : 'recetas guardadas'}.
                     </p>
