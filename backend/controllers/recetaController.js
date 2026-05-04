@@ -3,7 +3,7 @@ const Receta = require('../models/Receta');
 // 1. OBTENER TODAS LAS RECETAS DEL USUARIO
 exports.obtenerRecetas = async (req, res) => {
     try {
-        const usuarioId = req.user ? (req.user.usuario ? req.user.usuario.id : req.user.id) : null;
+        const usuarioId = req.user ? (req.user.usuario ? req.user.usuario.id : req.user.id) : null; 
         if (!usuarioId) return res.status(401).json({ msg: 'No autorizado' });
 
         const recetas = await Receta.find({ usuario: usuarioId }).sort({ createdAt: -1 });

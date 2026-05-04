@@ -44,7 +44,7 @@ const Dashboard = () => {
         }
     }, [token]);
 
-    useEffect(() => {
+    useEffect(() => { // useEffect es un disparador que hace que en cuanto entremos al dashboard me lance todas las recetas del usuario
         obtenerRecetas();
     }, [obtenerRecetas]);
 
